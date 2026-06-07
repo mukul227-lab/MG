@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Bestfriend Day❤️</title>
+    <style>
+        /* === BASE VARIABLES & IMPORTS === */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Caveat:wght@600&display=swap');
+
+        :root {
+            --primary: #FFD54F;
+            --cream: #FFFDD0;
+            --white: #FFFFFF;
+            --soft-orange: #FFB74D;
+            --light-gold: #FFE082;
+            --beige: #F5F5DC;
+            --text-dark: #4A4A4A;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --danger-red: #ff4757;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--cream), var(--beige));
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            cursor: none; 
+            transition: background 0.5s;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+        .handwritten { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #d35400; }
+
+        /* === FAKE LOADER === */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--cream);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+        #loader-text { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: var(--soft-orange); text-align: center;}
+        .spinner {
+            font-size: 4rem; animation: spin 2s linear infinite; margin-bottom: 20px;
+        }
+
+        /* === CUSTOM CURSOR === */
+        #custom-cursor {
+            position: fixed; top: 0; left: 0; font-size: 24px;
+            pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
+        }
+
+        /* === GLOBAL CLASSES === */
+        .glassmorphism {
+            background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
+
+        /* === HERO SECTION === */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; position: relative;
+            background: radial-gradient(circle at center, var(--primary) 0%, var(--cream) 70%);
+            overflow: hidden;
+        }
+        .hero h1 {
+            font-size: 4rem; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: fadeInDown 1.5s ease; margin-bottom: 10px; cursor: pointer;
+        }
+        .hero-img-container { position: relative; animation: pulseGlow 3s infinite alternate; margin-top: 20px; }
+        .hero-img { width: 300px; height: 300px; object-fit: cover; border-radius: 50%; border: 5px solid var(--white); }
+
+        /* === FLOATING FLOWERS & SNACKS === */
+        .floating-element { position: absolute; pointer-events: auto; animation: floatUp linear infinite; z-index: 0; cursor: pointer;}
+        .snack { position: fixed; font-size: 2rem; animation: fallDown linear forwards; z-index: 9000; pointer-events: none;}
+
+        /* === BUTTONS & CHAOS ACTIONS === */
+        .btn {
+            background: var(--soft-orange); color: #fff; border: none; padding: 15px 30px;
+            font-size: 1rem; border-radius: 30px; cursor: pointer; font-family: 'Poppins', sans-serif;
+            transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 15px rgba(255, 183, 77, 0.4); margin: 10px; font-weight: 600;
+        }
+        .btn:hover { transform: translateY(-3px) scale(1.05); background: #f39c12; }
+        .btn-danger { background: var(--danger-red); box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4); }
+        .btn-danger:hover { background: #ff6b81; }
+
+        .button-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
+
+        /* === ROAST & FACT MACHINE === */
+        .machine-box { padding: 40px; margin: 20px auto; max-width: 600px; }
+        .machine-text { font-size: 1.8rem; font-weight: bold; color: var(--text-dark); min-height: 60px; margin: 20px 0;}
+
+        /* === GIF GALLERY === */
+        .gif-gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+        .gif-item {
+            width: 250px; height: 250px; border-radius: 15px; object-fit: cover;
+            transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer;
+        }
+        .gif-item:hover { transform: scale(1.1) rotate(5deg); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        /* === ACHIEVEMENTS === */
+        .achievement-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+        .achievement-card {
+            background: linear-gradient(135deg, var(--light-gold), var(--primary));
+            padding: 20px; border-radius: 15px; width: 200px; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            transform: translateY(0); transition: 0.3s; border: 3px dashed #fff;
+        }
+        .achievement-card:hover { transform: translateY(-10px) rotate(-3deg); }
+        .achievement-card h3 { margin: 0 0 10px 0; font-size: 1.2rem; }
+        .achievement-card span { font-size: 3rem; display: block; margin-bottom: 10px;}
+
+        /* === POLAROIDS (UPDATED) === */
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 40px 0; }
+        .polaroid {
+            background: #fff; padding: 15px 15px 50px 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease; width: 200px; cursor: pointer;
+        }
+        .polaroid img { width: 100%; height: 200px; object-fit: cover; }
+        .polaroid p { margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; }
+        .polaroid:nth-child(even) { transform: rotate(5deg); }
+        .polaroid:nth-child(odd) { transform: rotate(-3deg); }
+        .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
+
+        /* === TOAST POPUPS === */
+        #toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast {
+            background: #ff4757; color: white; padding: 15px 25px; border-radius: 10px; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); animation: slideInLeft 0.5s forwards; font-family: 'Poppins', sans-serif;
+        }
+
+        /* === SECRET CHAOS MODE === */
+        body.chaos-mode { background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff); background-size: 400% 400%; animation: rainbowBg 3s ease infinite; }
+        .chaos-mode h1, .chaos-mode h2 { animation: wiggle 0.5s infinite; color: #fff;}
+        .chaos-mode .glassmorphism { animation: spin 4s linear infinite; }
+        .chaos-mode img { filter: hue-rotate(90deg); }
+
+        /* === KEYFRAMES === */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { from { box-shadow: 0 0 20px var(--light-gold); } to { box-shadow: 0 0 50px var(--soft-orange); } }
+        @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); opacity: 1; } to { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+        @keyframes fallDown { from { transform: translateY(-10vh) rotate(0deg); opacity: 1; } to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-100%); opacity: 0; } }
+        @keyframes wiggle { 0% { transform: rotate(0deg); } 25% { transform: rotate(-10deg) scale(1.2); } 50% { transform: rotate(10deg) scale(1.2); } 75% { transform: rotate(-10deg) scale(1.2); } 100% { transform: rotate(0deg) scale(1); } }
+        @keyframes rainbowBg { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+        .wiggle-active { animation: wiggle 0.5s ease; }
+        #hidden-pic { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; border: 10px solid #fff; box-shadow: 0 0 50px rgba(0,0,0,0.5); border-radius: 20px;}
+    </style>
+</head>
+<body>
+
+    <!-- FAKE LOADING SCREEN -->
+    <div id="loader">
+        <div class="spinner">🌻</div>
+        <h2 id="loader-text">Scanning friendship...</h2>
+    </div>
+
+    
+    <!-- TOAST POPUPS CONTAINER -->
+    <div id="toast-container"></div>
+
+    <!-- HIDDEN DO NOT CLICK PIC -->
+    <img id="hidden-pic" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXZzNzhybTdnYmRrbzltbGw1d2V2Y2hpbHp6N3I2OXlnYjk5dzk1dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Embarrassing">
+
+    <!-- AUDIO FOR BOOP -->
+    <audio id="boop-sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="chaos-sound" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <h1 id="secret-title" onclick="triggerChaosMode()" title="Click me 5 times...">Happy bestfriend Day 😭❤️ </h1>
+        <h2 style="color: var(--text-dark);">Peterrrrrrrrrrr💕</h2>
+        <div class="hero-img-container">
+            <img src="GM.png" alt="Us" class="hero-img">
+        </div>
+    </div>
+
+    <!-- FUNNY BUTTONS -->
+    <section>
+        <h2>Control Center 🎛️</h2>
+        <div class="button-grid">
+            <button class="btn btn-danger" onclick="doNotClick()">DO NOT CLICK</button>
+            <button class="btn" onclick="bestieSupport()">Emergency Bestie Support</button>
+            <button class="btn" onclick="sendSnacks()">Send Snacks 🍕</button>
+            <button class="btn" onclick="revealEmbarrassing()">Reveal Embarrassing Memory</button>
+            <button class="btn" onclick="howAnnoying()">How Annoying Am I?</button>
+            <button class="btn" onclick="moodScanner()">Bestie Mood Scanner</button>
+            <button class="btn" onclick="fakeMoney()">Free ₹1 Crore</button>
+        </div>
+    </section>
+
+    <!-- FRIENDLY ROAST MACHINE -->
+    <section>
+        <div class="glassmorphism machine-box">
+            <h2>The Roast Machine 🔥</h2>
+            <div id="roast-display" class="machine-text handwritten">Click to get roasted.</div>
+            <button class="btn btn-danger" onclick="generateRoast()">Roast Me</button>
+        </div>
+    </section>
+
+    <!-- FUNNY GIF SECTION -->
+    <section>
+        <h2>Accurate Representation of Us 🤪</h2>
+        <div class="gif-gallery">
+            <img src="M1.gif" class="gif-item" alt="Chaotic GIF 1">
+            <img src="M2.gif" class="gif-item" alt="Dancing Sunflower">
+            <img src="M3.gif" class="gif-item" alt="Funny Animal">
+            <img src="M4.gif" class="gif-item" alt="Celebration">
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section>
+        <h2>Unlocked Achievements 🏆</h2>
+        <div class="achievement-grid">
+            <div class="achievement-card">
+                <span>🌪️</span>
+                <h3>Master of Chaos</h3>
+                <p>Causing trouble since day 1.</p>
+            </div>
+            <div class="achievement-card">
+                <span>🗣️</span>
+                <h3>Professional Yap Specialist</h3>
+                <p>Can speak for 8 hours unprompted.</p>
+            </div>
+            <div class="achievement-card">
+                <span>📱</span>
+                <h3>Certified Meme Expert</h3>
+                <p>Communicates entirely in reels.</p>
+            </div>
+            <div class="achievement-card">
+                <span>🐢</span>
+                <h3>Gold Medal in Being Late</h3>
+                <p>"I'm 5 minutes away" (Lies).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RANDOM FACT GENERATOR -->
+    <section>
+        <div class="glassmorphism machine-box">
+            <h2>Bestie Fact Generator 🧠</h2>
+            <div id="fact-display" class="machine-text">Discover a very scientific fact about us.</div>
+            <button class="btn" onclick="generateFact()">Generate Random Fact</button>
+        </div>
+    </section>
+
+    <!-- POLAROID GALLERY (UPDATED CAPTIONS) -->
+    <section>
+        <h2>The Evidence 📸</h2>
+        <div class="gallery">
+            <div class="polaroid">
+                <img src="G1.jpg" alt="Memory">
+                <p>"Evidence."</p>
+            </div>
+            <div class="polaroid">
+                <img src="G2.jpg" alt="Memory">
+                <p>"We survived this somehow."</p>
+            </div>
+            <div class="polaroid">
+                <img src="G3.jpg" alt="Memory">
+                <p>"Peak intelligence."</p>
+            </div>
+            <div class="polaroid">
+                <img src="G4.jpg" alt="Memory">
+                <p>"Moments before disaster."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENDING SECTION -->
+    <section style="margin-bottom: 100px;">
+        <div class="glassmorphism" style="padding: 40px; border: 3px solid var(--soft-orange);">
+            <h3 style="color: var(--danger-red);">⚠️ WARNING ⚠️</h3>
+            <p style="font-weight: bold;">Congratulations. You have successfully completed the Friendship Experience. Side effects may include smiling, laughing, and missing your bestie.</p>
+            <hr style="border: 1px solid var(--light-gold); margin: 30px 0;">
+            <h2>To A Lifetime More... 🥂</h2>
+            <p>Jokes aside, thank you for being my rock, my confidant, and my favorite person. I wouldn't want to navigate this chaotic life with anyone else. Here is to making a million more ridiculous memories together. I love you!</p>
+        </div>
+    </section>
+
+    <!-- === JAVASCRIPT === -->
+    <script>
+        // 1. FAKE LOADER
+        const loaderTexts = [
+            "Scanning friendship...", 
+            "Collecting memories...", 
+            "Counting inside jokes...", 
+            "Detecting chaos...", 
+            "Friendship loaded successfully."
+        ];
+        let textIndex = 0;
+        const loaderEl = document.getElementById('loader-text');
+        const loaderDiv = document.getElementById('loader');
+
+        const loaderInterval = setInterval(() => {
+            textIndex++;
+            if(textIndex < loaderTexts.length) {
+                loaderEl.innerText = loaderTexts[textIndex];
+            } else {
+                clearInterval(loaderInterval);
+                loaderDiv.style.opacity = '0';
+                setTimeout(() => loaderDiv.style.display = 'none', 1000);
+                triggerRandomPopups(); // Start popups after load
+            }
+        }, 800);
+
+        // 2. CUSTOM CURSOR & CLICK EFFECTS
+        const cursor = document.getElementById('custom-cursor');
+        const boopSound = document.getElementById('boop-sound');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+
+        function playBoop() {
+            boopSound.currentTime = 0;
+            boopSound.play().catch(e => console.log("Audio needs interaction first"));
+        }
+
+        // 3. FLOATING FLOWERS WITH WIGGLE
+        const emojis = ['🌻', '🌷', '✨', '💛', '🤪', '🍕'];
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('floating-element');
+            flower.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            flower.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            
+            // Wiggle and sound on click
+            flower.addEventListener('click', () => {
+                flower.classList.add('wiggle-active');
+                playBoop();
+                setTimeout(() => flower.classList.remove('wiggle-active'), 500);
+            });
+
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 15000);
+        }
+        setInterval(createFlower, 800);
+
+        // 4. FUNNY BUTTON ACTIONS
+        function doNotClick() {
+            const pic = document.getElementById('hidden-pic');
+            pic.style.display = 'block';
+            setTimeout(() => pic.style.display = 'none', 3000);
+        }
+
+        function bestieSupport() {
+            alert("You are a beautiful, chaotic masterpiece! Now go drink some water and fix your posture!");
+        }
+
+        function sendSnacks() {
+            const snacks = ['🍕', '🍩', '🍟', '🍪', '🍔', '🧋', '🍫', '🌮'];
+            for(let i=0; i<40; i++) {
+                setTimeout(() => {
+                    let s = document.createElement('div');
+                    s.innerText = snacks[Math.floor(Math.random()*snacks.length)];
+                    s.className = 'snack';
+                    s.style.left = Math.random() * 100 + 'vw';
+                    s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(s);
+                    setTimeout(() => s.remove(), 4000);
+                }, i * 50);
+            }
+        }
+
+        function revealEmbarrassing() {
+            alert("Error 404: Memory too embarrassing to display publicly. Security clearance required.");
+        }
+
+        function howAnnoying() {
+            alert("Calculating... 100% Annoying. But I love you anyway. 🙄💛");
+        }
+
+        function moodScanner() {
+            const moods = ["Feral", "Gremlin Mode", "Ready for Nap", "Hangry", "Plotting Chaos", "Main Character Energy"];
+            alert("Current Mood Detected: " + moods[Math.floor(Math.random() * moods.length)]);
+        }
+
+        function fakeMoney() {
+            alert("Nice Try. You are stuck being broke with me forever.");
+        }
+
+        // 5. ROAST MACHINE
+        const roasts = [
+            "Professional snack destroyer.",
+            "World champion of replying late.",
+            "CEO of unnecessary drama.",
+            "Certified troublemaker.",
+            "Your screen time is higher than my credit score.",
+            "You have 0% patience and 100% confidence."
+        ];
+        function generateRoast() {
+            const display = document.getElementById('roast-display');
+            display.innerText = roasts[Math.floor(Math.random() * roasts.length)];
+            display.classList.add('wiggle-active');
+            setTimeout(() => display.classList.remove('wiggle-active'), 500);
+            playBoop();
+        }
+
+        // 6. FACT GENERATOR
+        const facts = [
+            "Consumes 99% of available snacks in a 5-mile radius.",
+            "Capable of talking for 8 hours continuously without breathing.",
+            "Is physically incapable of deciding where to eat.",
+            "Has survived entirely on iced coffee and delusions today."
+        ];
+        function generateFact() {
+            document.getElementById('fact-display').innerText = facts[Math.floor(Math.random() * facts.length)];
+            playBoop();
+        }
+
+        // 7. FUNNY TOAST POPUPS
+        const popupMessages = [
+            "Warning: Too much friendship detected.",
+            "System overloaded with memories.",
+            "Friendship level: Dangerous.",
+            "Bestie detected. Activating happiness mode.",
+            "Reminder: You owe me food."
+        ];
+        
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = msg;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOutLeft 0.5s forwards';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        function triggerRandomPopups() {
+            setInterval(() => {
+                if(Math.random() > 0.6) { // 40% chance every 10 seconds
+                    showToast(popupMessages[Math.floor(Math.random() * popupMessages.length)]);
+                }
+            }, 10000);
+        }
+
+        // 8. SECRET CHAOS MODE
+        let titleClicks = 0;
+        function triggerChaosMode() {
+            titleClicks++;
+            if(titleClicks === 5) {
+                document.body.classList.add('chaos-mode');
+                document.getElementById('chaos-sound').play().catch(e => {});
+                showToast("🔥 CHAOS MODE ACTIVATED 🔥");
+                
+                // Explode confetti emojis
+                for(let i=0; i<100; i++) {
+                    setTimeout(createFlower, i * 20); 
+                }
+                
+                // Reset after 10 seconds
+                setTimeout(() => {
+                    document.body.classList.remove('chaos-mode');
+                    titleClicks = 0;
+                    showToast("Chaos mode deactivated. Back to normal... mostly.");
+                }, 10000);
+            }
+        }
+    </script>
+</body>
+</html>
